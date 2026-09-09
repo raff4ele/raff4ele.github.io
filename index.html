@@ -1,13 +1,127 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Studio Borges — Palazzo Immersivo</title>
-<meta http-equiv="refresh" content="0; url=./atelier.html"/>
-<link rel="canonical" href="./atelier.html"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Studio Borges — Palazzo Immersivo</title>
+  <meta name="description" content="Atelier 3D immersivo di Studio Borges. Architettura e interior design turnkey — Milano, Europa, UAE, USA, Brasile." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./css/atelier.css" />
 </head>
-<body style="background:#050505;color:#c9a86c;font-family:Georgia,serif;display:grid;place-items:center;height:100vh">
-<p>Apertura dell'atelier… <a href="./atelier.html" style="color:#c9a86c">entra</a></p>
+<body>
+  <div id="cursor"></div>
+  <div id="cursor-label"></div>
+  <div id="loader">
+    <div class="mono" data-i18n="loaderKicker">By appointment · Milano</div>
+    <div class="loader-mark">SB</div>
+    <div class="mono" style="letter-spacing:.5em;opacity:.7">STUDIO BORGES</div>
+    <div class="loader-bar"><span id="bar"></span></div>
+    <div class="loader-pct" id="pct">00</div>
+  </div>
+  <canvas id="world"></canvas>
+  <div id="grain"></div>
+  <div id="vignette"></div>
+  <header>
+    <a class="brand" href="#" id="goHome">STUDIO BORGES</a>
+    <nav>
+      <button data-go="1" data-i18n="navVision">Visione</button>
+      <button data-go="2" data-i18n="navAtelier">Atelier</button>
+      <button data-go="3" data-i18n="navProjects">Progetti</button>
+      <button data-go="4" data-i18n="navVoices">Voci</button>
+      <button class="cta" data-open="contact" data-i18n="navContact">Contatti</button>
+      <div class="lang">
+        <button data-lang="it" class="on">IT</button>
+        <button data-lang="en">EN</button>
+        <button data-lang="pt">PT</button>
+      </div>
+    </nav>
+  </header>
+  <div id="hud">
+    <div id="chapter"></div>
+    <div id="heroCopy" class="panel show">
+      <div class="kicker" data-i18n="kicker">Luxury Interior Design · Turnkey</div>
+      <h1 data-i18n-html="heroTitle">Spazi da vivere,<br><em>valore da tramandare.</em></h1>
+      <p class="lead" data-i18n="heroLead">Uno studio milanese che accompagna ogni cliente dalla prima visione allo styling finale. Residenze, hospitality e commerciale in Europa, UAE, USA e Brasile.</p>
+      <div class="row">
+        <button class="btn solid" data-go="3" data-i18n="ctaProjects">Entra nei palazzi</button>
+        <button class="btn" data-open="about" data-i18n="ctaVision">La visione</button>
+      </div>
+    </div>
+    <div id="detail">
+      <div class="meta" id="dMeta"></div>
+      <h2 id="dTitle"></h2>
+      <p id="dBody"></p>
+      <div class="row" id="dActions" style="margin-top:14px"></div>
+    </div>
+  </div>
+  <button class="btn" id="roomExit" data-i18n="exitRoom">← Torna alla galleria</button>
+  <div class="dock">
+    <button id="soundBtn" data-i18n="soundOn">Suono · on</button>
+    <button id="modeToggle" data-i18n="modeAtelier">Modalità atelier</button>
+  </div>
+  <div id="progress"><i id="pbar"></i></div>
+  <div id="scrollHint" data-i18n="scroll">Scorri · trascina · clicca una tela</div>
+  <div class="overlay" id="about">
+    <div class="sheet">
+      <button class="close" data-close data-i18n="close">Chiudi</button>
+      <div class="kicker" data-i18n="founder">Fondatrice</div>
+      <h3>Glaucia Borges</h3>
+      <img src="https://images.weserv.nl/?url=www.studioborges.com/wp-content/uploads/2025/10/Glaucia-Borges.webp&w=600&output=jpg" alt="Glaucia Borges" style="width:160px;height:210px;object-fit:cover;margin:18px 0 8px;border:1px solid rgba(201,168,108,.35);" />
+      <p class="lead" style="max-width:640px;margin-top:16px" data-i18n="aboutLead">Designer brasiliana formata tra Architettura in Brasile e Interior Design a Milano.</p>
+      <p class="quote">“<span data-i18n="quote">Il design va ben oltre l’estetica: è uno strumento capace di migliorare la qualità della vita.</span>” <cite>Glaucia Borges</cite></p>
+      <div class="grid">
+        <div class="card"><h4 data-i18n="card1t">Sartoriale</h4><p data-i18n="card1">Ogni progetto nasce dall’ascolto.</p></div>
+        <div class="card"><h4 data-i18n="card2t">Milano e il mondo</h4><p data-i18n="card2">Italia, Spagna, Portogallo, Francia, UK, Germania, UAE, Miami e Brasile.</p></div>
+        <div class="card"><h4 data-i18n="card3t">Turnkey</h4><p data-i18n="card3">Dalla visione alla consegna, un unico filo.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="overlay" id="services">
+    <div class="sheet">
+      <button class="close" data-close data-i18n="close">Chiudi</button>
+      <div class="kicker" data-i18n="servicesK">Servizi</div>
+      <h3 data-i18n="servicesH">Un percorso completo</h3>
+      <div class="grid">
+        <div class="card"><h4 data-i18n="s1t">Architettura</h4><p data-i18n="s1">Residenze trasformate in rifugi di lusso.</p></div>
+        <div class="card"><h4 data-i18n="s2t">Design d'interni</h4><p data-i18n="s2">Spazi sofisticati e identitari.</p></div>
+        <div class="card"><h4 data-i18n="s3t">Renovation</h4><p data-i18n="s3">Trasformazione totale dello spazio esistente.</p></div>
+        <div class="card"><h4 data-i18n="s4t">Personal Shopper</h4><p data-i18n="s4">Selezione di arredi, arte e oggetti.</p></div>
+        <div class="card"><h4 data-i18n="s5t">Personal Organizer</h4><p data-i18n="s5">Ordine e logistica.</p></div>
+        <div class="card"><h4 data-i18n="s6t">Hospitality</h4><p data-i18n="s6">Cliniche, residenze e retail.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="overlay" id="contact">
+    <div class="sheet">
+      <button class="close" data-close data-i18n="close">Chiudi</button>
+      <div class="kicker">Atelier · Milano</div>
+      <h3 data-i18n="contactH">Iniziamo il vostro progetto</h3>
+      <p class="lead" style="margin-top:12px">Via Vittoria Colonna 40, Milano · +39 329 020 5807 · info@studioborges.com</p>
+      <div class="row" style="margin-top:14px">
+        <a class="btn solid" href="https://wa.link/cv8jhd" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="btn" href="mailto:info@studioborges.com">Email</a>
+        <a class="btn" href="tel:+393290205807" data-i18n="call">Chiama</a>
+        <a class="btn" href="https://www.instagram.com/glauciaborgesdesign" target="_blank" rel="noopener">Instagram</a>
+      </div>
+      <form id="lead" onsubmit="event.preventDefault(); this.querySelector('[type=submit]').textContent=window.SB_I18N[window.SB_LANG].sent;">
+        <input required name="name" data-ph="phName" placeholder="Nome e cognome" />
+        <input required type="email" name="email" placeholder="Email" />
+        <input name="city" data-ph="phCity" placeholder="Città del progetto" />
+        <select name="type">
+          <option data-i18n="opt1">Residenziale</option>
+          <option>Hospitality</option>
+          <option data-i18n="opt3">Commerciale</option>
+          <option>Renovation</option>
+          <option data-i18n="opt5">Consulenza</option>
+        </select>
+        <textarea name="msg" data-ph="phMsg" placeholder="Raccontateci lo spazio"></textarea>
+        <button class="btn solid" type="submit" data-i18n="send">Invia richiesta</button>
+      </form>
+    </div>
+  </div>
+  <script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"}}</script>
+  <script type="module" src="./js/atelier.js"></script>
 </body>
 </html>
